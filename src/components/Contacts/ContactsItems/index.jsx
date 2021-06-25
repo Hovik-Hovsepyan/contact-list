@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import Person from './Person';
 
 class ContactsItems extends Component {

@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import './Modal.css';
+
+import { modalInp } from './modalInp';
+
 import {
   BsCheckAll,
   FcCancel,
 } from 'react-icons/all';
-import { modalInp } from './modalInp';
+
+import './Modal.css';
 
 class Modal extends Component {
   constructor(props) {
@@ -21,7 +24,7 @@ class Modal extends Component {
       loaded: false,
       status: false,
     }
-    
+
     this.change = this.change.bind(this);
     this.validationPhone = this.validationPhone.bind(this);
     this.validationEmail = this.validationEmail.bind(this);
@@ -43,28 +46,24 @@ class Modal extends Component {
     const regexp = /^[a-z ,.'-]+$/i;
     return regexp.test(name);
   }
-
+  
   validationPhoto(url) {
 
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
 
       const image = new Image();
       image.src = url;
 
-      if (image.complete) {
-        resolve('');
-      } else {
-        image.onload = function () {
-          resolve('');
-        }
-        image.onerror = function () {
-          reject('photo')
-        }
+      image.onload = function () {
+        resolve(true);
+      }
+      image.onerror = function () {
+        resolve(false)
       }
     })
   }
 
-  validation() {
+  async validation () {
     const {
       name,
       surname,
@@ -73,42 +72,26 @@ class Modal extends Component {
       photo,
     } = this.state;
 
-    const validationPhone = this.validationPhone(phone);
-    const validationEmail = this.validationEmail(email);
-    const validationName = this.validationName(name);
-    const validationSurName = this.validationName(surname);
-
     const validateObj = {
-      name: validationName,
-      surname: validationSurName,
-      email: validationEmail,
-      phone: validationPhone,
+      name: this.validationName(name),
+      surname: this.validationName(surname),
+      email: this.validationEmail(email),
+      phone: this.validationPhone(phone),
+      photo: await this.validationPhoto(photo),
     };
-
-    const validateParams = {
-      name,
-      surname,
-      email,
-      phone,
-      photo,
-    };
-
-    for (let key in validateParams) {
-      if (!validateParams[key]) {
-        this.setState({ empty: key });
-        return;
-      } else {
-        this.setState({ empty: '' })
-      }
-    }
 
     for (let key in validateObj) {
+      if(!this.state[key]) {
+        return `Fill ${key} field`;
+      } 
       if (!validateObj[key]) {
-        this.setState({ err: key });
-        return;
+        return `Use correct ${key} format`;
       }
     }
-    return true;
+
+    this.setState({err: ''});
+
+    return "ok";
   }
 
   componentDidMount() {
@@ -130,7 +113,7 @@ class Modal extends Component {
         photo,
         status,
         selectedRadio: status ? "online" : "offline",
-      })
+      });
     }
   }
 
@@ -144,7 +127,7 @@ class Modal extends Component {
     });
   }
 
-  getCreate() {
+  async getCreate(cb) {
     const {
       name,
       surname,
@@ -163,57 +146,19 @@ class Modal extends Component {
       status,
     };
 
-    const validator = this.validation();
-
-    if (validator) {
-      this.validationPhoto(photo)
-        .then(() => {
-          this.props.create(obj);
-        })
-        .catch(error => {
-          this.setState({ err: error })
-        })
-    }
+    const validator = await this.validation();
+      validator === "ok" ? typeof cb === "function" && cb(obj) :
+      this.setState({ err : validator });
   }
 
-  getSaveContact() {
-    const {
-      name,
-      surname,
-      email,
-      phone,
-      photo,
-      status,
-    } = this.state;
-
-    let obj = {
-      name,
-      surname,
-      email,
-      phone,
-      photo,
-      status,
-    };
-
-    const validator = this.validation();
-
-    if (validator) {
-      this.validationPhoto(photo)
-        .then(() => {
-          this.props.saveContact(obj);
-        })
-        .catch(error => {
-          this.setState({ err: error })
-        })
-    }
-  }
 
   render() {
-
     const {
       closeModal,
       objValues,
-      editable
+      editable,
+      saveContact,
+      create,
     } = this.props;
 
     const {
@@ -228,7 +173,7 @@ class Modal extends Component {
 
           <span className="close" onClick={closeModal}>&times;</span>
 
-          {empty !== "" ? <p className="error">Fill {empty} field</p> : err !== "" ? <p className="error">Use correct {err} format</p> : ''}
+          {err && <p className="error">{err}</p>}
 
           {modalInp.map((el, index) => {
             return (
@@ -252,7 +197,7 @@ class Modal extends Component {
             )
           })}
           <label>Online
-          <input
+            <input
               onChange={this.change}
               type="radio"
               name="status"
@@ -261,8 +206,8 @@ class Modal extends Component {
             />
           </label>
 
-          <label>Offline    
-          <input
+          <label>Offline
+            <input
               onChange={this.change}
               type="radio"
               name="status"
@@ -272,17 +217,9 @@ class Modal extends Component {
           </label>
           <div className="inpBtns">
 
-            {editable ? (
-              <div className="createIcon">
-                <BsCheckAll onClick={() => this.getSaveContact()} />
-              </div>
-            )
-              : (
-                <div className="createIcon">
-                  <BsCheckAll onClick={() => this.getCreate()} />
-                </div>
-              )
-            }
+            <div className="createIcon">
+              <BsCheckAll onClick={() => this.getCreate(editable ? saveContact : create)} />
+            </div>
 
             <div className="cancelIcon">
               <FcCancel onClick={closeModal} />

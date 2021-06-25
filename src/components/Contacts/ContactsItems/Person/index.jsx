@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
+
 import { 
   FaUserEdit,
   GiCancel,
   GrStatusGoodSmall,
 } from 'react-icons/all';
+
 import './Person.css'
 
 class Person extends Component {
   constructor(props) {
     super(props);
   }
-
+  
   render() {
-
     const {
       photo,
       name,
@@ -25,15 +26,15 @@ class Person extends Component {
     const {
       editContact,
       delContact
-    } = this.props
+    } = this.props;
 
     return (
       <div className="person">
         <div className="pers">
           <div className="image">
             <img src={photo} className="img" alt={photo} />
-            {status ? <div className="online"> <GrStatusGoodSmall />  </div> 
-                    : <div className="offline"> <GrStatusGoodSmall /> </div>}
+            {status ? <div className="online"><GrStatusGoodSmall /></div> 
+                    : <div className="offline"><GrStatusGoodSmall /></div>}
           </div>
           <div className="info">
             <div className="fullName">

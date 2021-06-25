@@ -30,13 +30,13 @@
   justify-content: space-between;
 }
 
-.deleteIcon:hover {
+/* .deleteIcon:hover {
   transform: scale(1.1);
 }
 
 .editIcon:hover {
   transform: scale(1.1);
-} 
+} */
 
 .editBtn,
 .delBtn {
@@ -104,10 +104,11 @@
   width: 27%;
 }
 
-.online, .offline {
+.online,
+.offline {
   position: relative;
-  left: 46px;
-  bottom: 40px;
+  left: 45px;
+  bottom: 55px;
   font-size: 25px;
 }
 

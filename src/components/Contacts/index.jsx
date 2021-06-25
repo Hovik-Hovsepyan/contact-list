@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+
 import Modal from './Modal';
 import ContactsItems from './ContactsItems';
+
 import { BsFillPersonPlusFill } from 'react-icons/bs';
+
 import './Contacts.css';
 
 class Contacts extends Component {
@@ -38,19 +41,14 @@ class Contacts extends Component {
       show: false,
       contactArr: [
         ...this.state.contactArr,
-        obj
-      ]
-    })
+        obj,
+      ],
+    });
   }
 
   delContact(index) {
     const contactArr = this.state.contactArr;
-
-    this.setState({
-      contactArr: contactArr.filter(person => {
-        return contactArr.indexOf(person, index) !== index;
-      })
-    })
+    this.setState({ contactArr: contactArr.filter(person => contactArr.indexOf(person, index) !== index) });
   }
 
   editContact(index) {
@@ -58,21 +56,18 @@ class Contacts extends Component {
       editable: true,
       show: true,
       changeable: index,
-    })
+    });
   }
 
   saveContact(obj) {
-
     let changeableArr = this.state.contactArr;
     let index = this.state.changeable;
-
     changeableArr[index] = obj;
-
     this.setState({
       editable: false,
       show: false,
       contactArr: changeableArr,
-    })
+    });
   }
 
   render() {
@@ -87,9 +82,13 @@ class Contacts extends Component {
       <div className="contacts">
         <div className="addContact">
           <BsFillPersonPlusFill onClick={this.addContact} />
+          <ContactsItems
+            contactArr={contactArr}
+            editContact={this.editContact}
+            delContact={this.delContact}
+          />
         </div>
-
-        {show ? (
+        {show && (
           <Modal
             closeModal={this.closeModal}
             change={this.change}
@@ -100,14 +99,6 @@ class Contacts extends Component {
             objValues={contactArr[changeable]}
           />
         )
-          :
-          (
-            <ContactsItems
-              contactArr={contactArr}
-              editContact={this.editContact}
-              delContact={this.delContact}
-            />
-          )
         }
       </div>
     )
