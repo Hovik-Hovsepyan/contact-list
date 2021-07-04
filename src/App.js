@@ -1,19 +1,15 @@
-import React from "react";
-import Person from "./components/Person/Person";
-import Inputs from "./components/Inputs/Inputs";
-import './App.css';
-import './components/Person/Person.css';
-import './components/Inputs/Inputs.css'
+import React, { Component } from 'react';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props)
-  }
+import Contacts from './components/Contacts';
+
+import './App.css';
+
+class App extends Component {
   render() {
-    return(
-      <div className = "contacts">
-        <Inputs />
-      </div>
+    return (
+      <div>
+        <Contacts />
+      </div>   
     )
   }
 }

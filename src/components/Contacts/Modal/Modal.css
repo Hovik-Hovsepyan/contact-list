@@ -1,0 +1,122 @@
+.modal {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  margin: auto;
+  padding: 20px;
+  position: relative;
+  box-shadow: 0 0 5px 0px #463636;
+  width: 11%;
+  border-radius: 20px;
+  background: linear-gradient(to top, #233e4c, #7c715a);
+}
+
+.modalInp>input,
+span {
+  display: block;
+  margin: 10px;
+  padding: 5px;
+  border: none;
+  border-radius: 7px;
+  font-weight: bold;
+  transition: .8s;
+  outline: none;
+}
+
+.modalInp>input:hover {
+  transform: scale(1.08);
+}
+
+.close {
+  color: #000;
+  float: right;
+  font-size: 30px;
+  font-weight: bold;
+  position: absolute;
+  transition: .6s;
+  right: 0;
+  top: 0;
+}
+
+.close:hover,
+.close:focus {
+  color: #bd0000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+label {
+  margin: 0 15px;
+}
+
+.inpBtns {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.inpBtns>button {
+  padding: 5px;
+}
+
+.createIcon {
+  font-size: 35px;
+  color: #159615;
+  margin: 0 25px;
+  cursor: pointer;
+  transition: .6s;
+}
+
+.createIcon:hover {
+  transform: scale(1.5);
+}
+
+.cancelIcon {
+  font-size: 35px;
+  margin: 0 25px;
+  cursor: pointer;
+  transition: .6s;
+}
+
+.cancelIcon:hover {
+  transform: scale(1.5);
+}
+
+.phoneLabel {
+  position: absolute;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 2px;
+
+}
+
+.phoneCode {
+  position: relative;
+  z-index: 1;
+}
+
+.phoneInp {
+  padding: 15px;
+}
+
+input[name="phone"] {
+  padding: 5px 0px 5px 43px;
+  width: 139px;
+}
+
+.error {
+  color: #bd0000d9;
+  font-size: 14px;
+  font-weight: 700;
+}

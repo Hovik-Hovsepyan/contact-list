@@ -1,0 +1,126 @@
+.persons {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.pers {
+  width: 600px;
+  height: 150px;
+  background: linear-gradient(to top, #616161, #9bc5c3);
+  margin: 35px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 0 4px 0px #252525;
+  border-radius: 20px;
+}
+
+.img {
+  width: 80%;
+  height: 80%;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-top: 15px;
+}
+
+.icons {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* .deleteIcon:hover {
+  transform: scale(1.1);
+}
+
+.editIcon:hover {
+  transform: scale(1.1);
+} */
+
+.editBtn,
+.delBtn {
+  width: 80px;
+  border: none;
+  cursor: pointer;
+  border-radius: 15px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.editable {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.photoUrl {
+  word-break: break-all;
+}
+
+.info {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.fullName,
+.contact {
+  display: flex;
+  justify-content: space-around;
+}
+
+.fullName {
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.contact {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.editIcon {
+  font-size: 45px;
+  margin-left: 50px;
+  margin-top: 30px;
+  color: #245a7c;
+  cursor: pointer;
+  transition: .8s;
+}
+
+.deleteIcon {
+  font-size: 31px;
+  margin-left: 40px;
+  color: #2d2d2d;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: .8s;
+}
+
+.image {
+  width: 27%;
+}
+
+.online,
+.offline {
+  position: relative;
+  left: 45px;
+  bottom: 55px;
+  font-size: 25px;
+}
+
+.offline {
+  color: #a92727;
+}
+
+.online {
+  color: #009405;
+}
+
+.links {
+  text-decoration: none;
+  color: black;
+}

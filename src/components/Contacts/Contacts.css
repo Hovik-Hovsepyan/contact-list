@@ -1,0 +1,17 @@
+.addContact {
+  font-size: 80px;
+  cursor: pointer;
+  text-align: center;
+  color: #39667f;
+  transition: .8s;
+}
+
+.contacts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffd89b;
+  background: -webkit-linear-gradient(to right, #19547b, #ffd89b);
+  background: linear-gradient(to right, #19547b, #ffd89b);
+  height: 100vh;
+}
